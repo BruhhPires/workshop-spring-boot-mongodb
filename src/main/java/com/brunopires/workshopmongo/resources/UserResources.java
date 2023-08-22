@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,5 +47,11 @@ public class UserResources {
 		return ResponseEntity.created(uri).build();              // O CREATED RETORNAR O CODIGO 201(QUE É O PADRÃO QUANDO CRIA) COM O CABEÇALHO CONTENDO A LOCALIZAÇÃO
 	}
 
+	@DeleteMapping(value = "/{id}")                               // METODO DE DELETAR
+	public ResponseEntity<Void> delete(@PathVariable String id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();  // DELETA E LANÇA O CODIGO 204(QUE É O PADRÃO PRA DELETE) 
+	
+	}
 
 }

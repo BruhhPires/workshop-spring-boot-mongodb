@@ -31,6 +31,10 @@ public class UserService {
 		
 	}
 	
+	public void delete (String id) {  // IMPLEMENTAÇÃO DELETE NO SERVICE
+		repo.deleteById(id);
+	}
+	
 	public User fromDTO(UserDTO objDto) {     // PEGA UM DTOE TRANSFORMA EM USER
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
