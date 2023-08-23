@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -50,8 +52,14 @@ public class UserResources {
 	@DeleteMapping(value = "/{id}")                               // METODO DE DELETAR
 	public ResponseEntity<Void> delete(@PathVariable String id){
 		service.delete(id);
-		return ResponseEntity.noContent().build();  // DELETA E LANÇA O CODIGO 204(QUE É O PADRÃO PRA DELETE) 
-	
+		return ResponseEntity.noContent().build();                // DELETA E LANÇA O CODIGO 204(QUE É O PADRÃO PRA DELETE) 
 	}
-
+	
+	@PutMapping(value = "/{id}")                              // METODO DE ATUALIZAR USUARIO(UPDATE)
+	public ResponseEntity<Void> uptdate(@PathVariable String id, @RequestBody UserDTO objDto){
+		User obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();                // DELETA E LANÇA O CODIGO 204(QUE É O PADRÃO PRA DELETE) 
+	}
 }

@@ -31,10 +31,22 @@ public class UserService {
 		
 	}
 	
-	public void delete (String id) {  // IMPLEMENTAÇÃO DELETE NO SERVICE
+	public void delete(String id) {  // IMPLEMENTAÇÃO DELETE NO SERVICE
 		repo.deleteById(id);
 	}
 	
+	public User update(User obj) {  						// IMPLEMENTAÇÃO UPTADE NO SERVICE
+		User newObj = findById(obj.getId());			    // INSTANCIAREMOS UM NEW OBJ PEGANDO OS DADOS DE UM OBJ ATRAVEZ DO GETID
+		updateData(newObj, obj);  							// O METEDO UPDATEDATE VAI PEGAR O OBJ E LANÇAR PARA O NEWOBJ
+		return repo.save(newObj);
+		
+	}
+	
+	private void updateData(User newObj, User obj) {       // METODO UPDATEDATE PEGA OS DADOS DO OBJ E LANÇA PRO NEW OBJ
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+	}
+
 	public User fromDTO(UserDTO objDto) {     // PEGA UM DTOE TRANSFORMA EM USER
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
