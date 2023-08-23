@@ -43,6 +43,9 @@ public class Instantiation implements CommandLineRunner{
 	
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
+		maria.getPosts().addAll(Arrays.asList(post1, post2)); // PEGA OS POSTS E VINCULA A MARIA 
+		userRepository.save(maria);
+		
 	}
 
 }
