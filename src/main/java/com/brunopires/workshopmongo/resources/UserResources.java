@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.brunopires.workshopmongo.domain.Post;
 import com.brunopires.workshopmongo.domain.User;
 import com.brunopires.workshopmongo.dto.UserDTO;
 import com.brunopires.workshopmongo.services.UserService;
-
+//--> OS ENDPOINTS SÃO RESPONSAVEIS PELA REQUISIÇÃO NO HTTP, POR EX: /USERS /ID /PUT /GET ETC... <--//
 @RestController
 @RequestMapping(value="/users")
 public class UserResources {
@@ -62,4 +62,11 @@ public class UserResources {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();                // DELETA E LANÇA O CODIGO 204(QUE É O PADRÃO PRA DELETE) 
 	}
+	
+	@GetMapping(value = "/{id}/posts")                 // METODO DE LOCALIZAR POSTS POR ID
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
+	
 }
