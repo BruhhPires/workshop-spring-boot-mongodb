@@ -41,7 +41,7 @@ public class UserResources {
 		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
-	@PostMapping                                 // METODO DE POSTAR(INSERIR)
+	@PostMapping                               					  // METODO DE POSTAR(INSERIR)
 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDto){
 		User obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
@@ -55,7 +55,7 @@ public class UserResources {
 		return ResponseEntity.noContent().build();                // DELETA E LANÇA O CODIGO 204(QUE É O PADRÃO PRA DELETE) 
 	}
 	
-	@PutMapping(value = "/{id}")                              // METODO DE ATUALIZAR USUARIO(UPDATE)
+	@PutMapping(value = "/{id}")                                  // METODO DE ATUALIZAR USUARIO(UPDATE)
 	public ResponseEntity<Void> uptdate(@PathVariable String id, @RequestBody UserDTO objDto){
 		User obj = service.fromDTO(objDto);
 		obj.setId(id);
